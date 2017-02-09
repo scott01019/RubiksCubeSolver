@@ -12,8 +12,8 @@ class CubePrinter {
 public:
   static void PrintCube(const Cube &);
 private:
-  static void Print(std::vector<std::vector<char>>[]);
   static int GetColor(char);
+  static void Print(std::vector<std::vector<char>>[]);
   static void SetFaces(std::vector<std::vector<char>>[], const Cube &);
 };
 
