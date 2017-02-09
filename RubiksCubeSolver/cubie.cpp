@@ -4,10 +4,12 @@
 #include <utility>
 #include <vector>
 
+#include <iostream>
+
 /*
   Constructor for Cubie class given the solved position of the cubie (x, y, z).
 */
-Cubie::Cubie(const std::tuple<int, int, int> &solved_position)
+Cubie::Cubie(const std::tuple<int, int, int> &solved_position) 
   : position_(solved_position), solved_position_(solved_position) {
   if (std::get<0>(position_) == 1) values_.push_back(std::make_tuple('R', 'R', 'R'));
   else if (std::get<0>(position_) == -1) values_.push_back(std::make_tuple('L', 'L', 'L'));
@@ -92,7 +94,7 @@ bool Cubie::IsSolved() const { return IsOriented() && IsPositioned(); }
   Sets the current face for the given value.
 */
 void Cubie::SetFaceForValue(char val, char face) {
-  for (auto value : values_)
+  for (std::tuple<char, char, const char> &value : values_)
     if (std::get<0>(value) == val)
       std::get<1>(value) = face;
 }

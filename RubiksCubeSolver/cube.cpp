@@ -5,6 +5,7 @@
 #include <random>
 #include <string>
 #include <tuple>
+#include <map>
 #include <utility>
 #include <vector>
 
@@ -13,14 +14,14 @@ const std::string Cube::MOVES[18] = { "R", "R'", "R2", "L", "L'", "L2", "F", "F'
 "B", "B'", "B2", "U", "U'", "U2", "D", "D'", "D2" };
 
 // Moves mapped to their respective methods.
-const std::unordered_map<std::string, void(Cube::*)(void)> Cube::MOVES_MAP = { { "R", &Cube::R }, { "R'", &Cube::Ri },
+const std::map<std::string, void(Cube::*)(void)> Cube::MOVES_MAP = { { "R", &Cube::R }, { "R'", &Cube::Ri },
 { "R2", &Cube::R2 }, { "L", &Cube::L }, { "L'", &Cube::Li }, { "L2", &Cube::L2 }, { "F", &Cube::F },
 { "F'", &Cube::Fi }, { "F2", &Cube::F2 }, { "B", &Cube::B }, { "B'", &Cube::Bi }, { "B2", &Cube::B2 },
 { "U", &Cube::U }, { "U'", &Cube::Ui }, { "U2", &Cube::U2 }, { "D", &Cube::D }, { "D'", &Cube::Di },
 { "D2", &Cube::D2 }, { "T", &Cube::T } };
 
 // Current face rotated around an axis mapped to their new face.
-const std::unordered_map<std::tuple<char, char>, char> Cube::ROTATIONS_MAP = {
+const std::map<std::tuple<char, char>, char> Cube::ROTATIONS_MAP = {
   { std::tuple<char, char>('F', 'x'), 'U' }, { std::tuple<char, char>('U', 'x'), 'B' },
   { std::tuple<char, char>('B', 'x'), 'D' }, { std::tuple<char, char>('D', 'x'), 'F' },
   { std::tuple<char, char>('R', 'x'), 'R' }, { std::tuple<char, char>('L', 'x'), 'L' },
@@ -56,14 +57,15 @@ void Cube::init() {
 */
 void Cube::Move(char axis, int layer, int turns) {
   for (auto i = 0; i < turns; ++i) {
-    for (auto cubie : cubies_) {
+    for (Cubie &cubie : cubies_) {
       if (cubie.IsInAxisLayer(axis, layer)) {
         for (auto value : cubie.values()) {
           cubie.SetFaceForValue(
             std::get<0>(value),
             ROTATIONS_MAP.at(std::make_tuple(std::get<1>(value), axis))
-            );
+          );
         }
+        Rotate(axis, cubie);
       }
     }
   }
@@ -117,15 +119,14 @@ void Cube::RotateY(Cubie &cubie) {
       std::get<2>(current),
       std::get<1>(current),
       std::get<0>(current) * -1
-
-      )
-    );
+    )
+  );
 }
 
 /*
   Rotates the given cubie 90 degrees around the z-axis.
 */
-void RotateZ(Cubie &cubie) {
+void Cube::RotateZ(Cubie &cubie) {
   std::tuple<int, int, int> current = cubie.position();
   cubie.set_position(
     std::make_tuple(
@@ -141,14 +142,14 @@ void RotateZ(Cubie &cubie) {
 */
 const Cubie &Cube::GetCubieByPosition(const std::tuple<int, int, int> &position) const {
   for (auto cubie : cubies_)
-    if (cubie.position == position) return cubie;
+    if (cubie.position() == position) return cubie;
 }
 
 /*
   Returns a vector of the unsolved corners.
 */
-std::vector<Cubie &> Cube::GetUnsolvedCorners() const {
-  std::vector<Cubie &> unsolved_corners;
+std::vector<Cubie> Cube::GetUnsolvedCorners() const {
+  std::vector<Cubie> unsolved_corners;
   for (auto cubie : cubies_)
     if (cubie.IsCorner() && !cubie.IsSolved()) unsolved_corners.push_back(cubie);
   return unsolved_corners;
@@ -157,8 +158,8 @@ std::vector<Cubie &> Cube::GetUnsolvedCorners() const {
 /*
   Returns a vector of all unsolved cubies.
 */
-std::vector<Cubie &> Cube::GetUnsolvedCubies() const {
-  std::vector<Cubie &> unsolved_cubies;
+std::vector<Cubie> Cube::GetUnsolvedCubies() const {
+  std::vector<Cubie> unsolved_cubies;
   for (auto cubie : cubies_)
     if (!cubie.IsSolved()) unsolved_cubies.push_back(cubie);
   return unsolved_cubies;
@@ -167,8 +168,8 @@ std::vector<Cubie &> Cube::GetUnsolvedCubies() const {
 /*
   Returns a vector of all unsolved edges.
 */
-std::vector<Cubie &> Cube::GetUnsolvedEdges() const {
-  std::vector<Cubie &> unsolved_edges;
+std::vector<Cubie> Cube::GetUnsolvedEdges() const {
+  std::vector<Cubie> unsolved_edges;
   for (auto cubie : cubies_)
     if (cubie.IsEdge() && !cubie.IsSolved()) unsolved_edges.push_back(cubie);
   return unsolved_edges;

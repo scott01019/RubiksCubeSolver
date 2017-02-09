@@ -3,9 +3,10 @@
 
 #include "cubie.h"
 
+#include <map>
+#include <memory>
 #include <string>
 #include <tuple>
-#include <unordered_map>
 #include <vector>
 
 /*
@@ -14,8 +15,8 @@
 class Cube {
 public:
   static const std::string MOVES[18];
-  static const std::unordered_map<std::string, void(Cube::*)(void)> MOVES_MAP; // Move -> Move Method
-  static const std::unordered_map<std::tuple<char, char>, char> ROTATIONS_MAP; // Current Face and Axis -> new Face
+  static const std::map<std::string, void(Cube::*)(void)> MOVES_MAP; // Move -> Move Method
+  static const std::map<std::tuple<char, char>, char> ROTATIONS_MAP; // Current Face and Axis -> new Face
   static const int SIZE = 3;
   static const std::vector<std::string> T_PERM;
 
@@ -29,9 +30,9 @@ public:
   void RotateY(Cubie &);
   void RotateZ(Cubie &);
   const Cubie &GetCubieByPosition(const std::tuple<int, int, int> &) const;
-  std::vector<Cubie &> GetUnsolvedCorners() const;
-  std::vector<Cubie &> GetUnsolvedCubies() const;
-  std::vector<Cubie &> GetUnsolvedEdges() const;
+  std::vector<Cubie> GetUnsolvedCorners() const;
+  std::vector<Cubie> GetUnsolvedCubies() const;
+  std::vector<Cubie> GetUnsolvedEdges() const;
   void Scramble();
   bool Solved() const;
 
@@ -62,12 +63,13 @@ public:
 
   void T() { Move(T_PERM); }
 
-  const std::vector<Cubie &> &cubies() const { return cubies_; }
+  const std::vector<Cubie> &cubies() const { return cubies_; }
   int size() const { return SIZE; }
+
 private:
   void init();
 
-  std::vector<Cubie &> cubies_; // A vector of the cubies.
+  std::vector<Cubie> cubies_; // A vector of the cubies.
 };
 
 #endif // CUBE_H_

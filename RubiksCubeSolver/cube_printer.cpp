@@ -41,6 +41,9 @@ int CubePrinter::GetColor(char face) {
   return 6;
 }
 
+/*
+  Prints the cube to the console.
+*/
 void CubePrinter::Print(std::vector<std::vector<char>> cube[]) {
   HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -83,10 +86,10 @@ void CubePrinter::Print(std::vector<std::vector<char>> cube[]) {
   Builds the printable cube from the Cube object.
 */
 void CubePrinter::SetFaces(std::vector<std::vector<char>> print_cube[], const Cube &cube) {
-  std::vector<Cubie &> cubies = cube.cubies();
+  std::vector<Cubie> cubies = cube.cubies();
   for (auto cubie : cubies) {
     std::tuple<int, int, int> position = cubie.position();
-    std::vector<std::tuple<char, char, char>> values = cubie.values();
+    std::vector<std::tuple<char, char, const char>> values = cubie.values();
     for (auto value : values) {
       switch (std::get<1>(value)) {
       case 'R': {
@@ -105,7 +108,7 @@ void CubePrinter::SetFaces(std::vector<std::vector<char>> print_cube[], const Cu
         print_cube[0][std::get<2>(position) * -1 + 1][std::get<0>(position) +1] = std::get<0>(value);
       } break;
       case 'D': {
-        print_cube[0][std::get<2>(position) +1][std::get<0>(position) +1] = std::get<0>(value);
+        print_cube[5][std::get<2>(position) +1][std::get<0>(position) +1] = std::get<0>(value);
       } break;
       }
     }
