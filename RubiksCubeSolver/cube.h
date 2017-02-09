@@ -15,8 +15,9 @@ class Cube {
 public:
   static const std::string MOVES[18];
   static const std::unordered_map<std::string, void(Cube::*)(void)> MOVES_MAP; // Move -> Move Method
-  static const std::unordered_map<std::tuple<char, char>, char> ROTATION_MAP; // Current Face and Axis -> new Face
+  static const std::unordered_map<std::tuple<char, char>, char> ROTATIONS_MAP; // Current Face and Axis -> new Face
   static const int SIZE = 3;
+  static const std::vector<std::string> T_PERM;
 
   Cube() { init(); }
 
@@ -28,10 +29,9 @@ public:
   void RotateY(Cubie &);
   void RotateZ(Cubie &);
   const Cubie &GetCubieByPosition(const std::tuple<int, int, int> &) const;
-  const std::vector<Cubie &> &GetUnsolvedCorners() const;
-  const std::vector<Cubie &> &GetUnsolvedCubies() const;
-  const std::vector<Cubie &> &GetUnsolvedEdges() const;
-  const std::vector<std::string> GetT() const;
+  std::vector<Cubie &> GetUnsolvedCorners() const;
+  std::vector<Cubie &> GetUnsolvedCubies() const;
+  std::vector<Cubie &> GetUnsolvedEdges() const;
   void Scramble();
   bool Solved() const;
 
@@ -60,7 +60,7 @@ public:
   void Di() { Cube::Move('y', -1, 1); }
   void D2() { Cube::Move('y', -1, 2); }
 
-  void T();
+  void T() { Move(T_PERM); }
 
   const std::vector<Cubie &> &cubies() const { return cubies_; }
   int size() const { return SIZE; }
