@@ -1,6 +1,7 @@
 #ifndef CUBIE_H_
 #define CUBIE_H_
 
+#include <tuple>
 #include <utility>
 #include <vector>
 
