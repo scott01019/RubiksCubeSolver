@@ -1,0 +1,43 @@
+-1 -1 -1 L R' D R 
+-1 -1 -1 D F2 
+-1 -1 -1 F D F' 
+-1 -1 0 L L U B' U' 
+-1 -1 0 D L2 
+-1 -1 1 L D2 F' 
+-1 -1 1 D D F2 
+-1 -1 1 B R' D2 R 
+-1 0 -1 L U' F U 
+-1 0 -1 F L' 
+-1 0 1 L U B' U' 
+-1 0 1 B L 
+-1 1 -1 L F 
+-1 1 -1 U F2 D' F2 
+-1 1 -1 F F' D F' 
+-1 1 0 L L U' F U 
+-1 1 0 U 
+-1 1 1 L R' B2 R F' 
+-1 1 1 U R2 B2 R2 
+-1 1 1 B R' B D2 R 
+0 -1 -1 D D' L2 
+0 -1 -1 F F L' F' 
+0 -1 1 D D L2 
+0 -1 1 B B' L B 
+0 1 -1 U R2 U R2 
+0 1 -1 F R F' R' L' 
+0 1 1 U R2 U' R2 
+0 1 1 B R' B R L 
+1 -1 -1 R F' 
+1 -1 -1 D D' F2 
+1 -1 -1 F F D F' 
+1 -1 0 R F' D' F L' 
+1 -1 0 D D2 L2 
+1 -1 1 R R F R' F2 
+1 -1 1 D D2 F2 
+1 -1 1 B D' F' 
+1 0 -1 R U' F' U 
+1 0 -1 F U2 R U2 
+1 0 1 R U B U' 
+1 0 1 B U2 R' U2 
+1 1 -1 R F D' F2 
+1 1 -1 U 
+1 1 -1 F F2 D F' 
