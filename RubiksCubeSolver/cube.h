@@ -30,6 +30,7 @@ public:
   void RotateY(Cubie &);
   void RotateZ(Cubie &);
   const Cubie &GetCubieByPosition(const std::tuple<int, int, int> &) const;
+  Cubie *GetCubiePtrByPosition(const std::tuple<int, int, int> &);
   std::vector<Cubie> GetUnsolvedCorners() const;
   std::vector<Cubie> GetUnsolvedCubies() const;
   std::vector<Cubie> GetUnsolvedEdges() const;
