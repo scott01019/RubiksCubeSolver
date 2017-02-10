@@ -31,7 +31,7 @@ public:
 
 private:
   std::tuple<int, int, int> position_; // x, y, z
-  const std::tuple<const int, const int, const int> solved_position_; // x, y, z
+  std::tuple<int, int, int> solved_position_; // x, y, z
   std::vector<std::tuple<char, char, const char>> values_; // value, face value is currently on, face value is solved on
 };
 
