@@ -52,6 +52,13 @@ void Cube::init() {
 }
 
 /*
+  A copy constructor for the Cube class.
+*/
+Cube::Cube(const Cube &cube) {
+  for (auto cubie : cube.cubies_) cubies_.push_back(cubie);
+}
+
+/*
   Rotates the given layer from the given axis clockwise 90 degrees 
   the given number of times.
 */
