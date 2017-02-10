@@ -20,6 +20,7 @@ public:
   static const std::vector<std::string> T_PERM;
 
   Cube() { init(); }
+  Cube(const Cube &);
 
   void Move(char, int, int);
   void Move(const std::string &);
