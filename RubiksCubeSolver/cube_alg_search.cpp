@@ -1,3 +1,4 @@
+#include "algs.h"
 #include "cube.h"
 #include "cube_alg_search.h"
 #include "cubie.h"
@@ -89,11 +90,7 @@ void CubeAlgSearch::GenerateCubieAlgorithms(const std::string &filename) {
         if (cubie.IsCorner())
           result = CubeAlgSearch::FindAlgorithm(p, std::get<0>(value), goal_corner, 'U', corner_holds);
         if (!cubie.IsCenter()) {
-          file << std::get<0>(p) << " " << std::get<1>(p) << " " << std::get<2>(p) << " " << std::get<0>(value) << " ";
-          for (auto move : result) {
-            file << move << " ";
-          }
-          file << "\n";
+         file << MyDecoraterAlg(p, std::get<0>(value), result);
         }
       }
     }
