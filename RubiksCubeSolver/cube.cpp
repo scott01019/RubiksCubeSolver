@@ -59,7 +59,8 @@ void Cube::Move(char axis, int layer, int turns) {
   for (auto i = 0; i < turns; ++i) {
     for (Cubie &cubie : cubies_) {
       if (cubie.IsInAxisLayer(axis, layer)) {
-        for (auto value : cubie.values()) {
+        std::vector<std::tuple<char, char, const char>> values = cubie.values();
+        for (auto value : values) {
           cubie.SetFaceForValue(
             std::get<0>(value),
             ROTATIONS_MAP.at(std::make_tuple(std::get<1>(value), axis))
@@ -141,17 +142,31 @@ void Cube::RotateZ(Cubie &cubie) {
   Returns the cubie at the given position.
 */
 const Cubie &Cube::GetCubieByPosition(const std::tuple<int, int, int> &position) const {
-  for (auto cubie : cubies_)
-    if (cubie.position() == position) return cubie;
+  int size = cubies_.size();
+  for (auto i = 0; i < size; ++i) {
+    if (cubies_[i].position() == position) return cubies_[i];
+  }
 }
+
+/*
+  Returns a ptr cubie at the given position.
+*/
+Cubie *Cube::GetCubiePtrByPosition(const std::tuple<int, int, int> &position) {
+  int size = cubies_.size();
+  for (auto i = 0; i < size; ++i)
+    if (cubies_[i].position() == position) return &cubies_[i];
+  return NULL;
+}
+
 
 /*
   Returns a vector of the unsolved corners.
 */
 std::vector<Cubie> Cube::GetUnsolvedCorners() const {
   std::vector<Cubie> unsolved_corners;
-  for (auto cubie : cubies_)
-    if (cubie.IsCorner() && !cubie.IsSolved()) unsolved_corners.push_back(cubie);
+  int size = cubies_.size();
+  for (auto i = 0; i < size; ++i)
+    if (cubies_[i].IsCorner() && !cubies_[i].IsSolved()) unsolved_corners.push_back(cubies_[i]);
   return unsolved_corners;
 }
 
@@ -160,8 +175,9 @@ std::vector<Cubie> Cube::GetUnsolvedCorners() const {
 */
 std::vector<Cubie> Cube::GetUnsolvedCubies() const {
   std::vector<Cubie> unsolved_cubies;
-  for (auto cubie : cubies_)
-    if (!cubie.IsSolved()) unsolved_cubies.push_back(cubie);
+  int size = cubies_.size();
+  for (auto i = 0; i < size; ++i)
+    if (!cubies_[i].IsSolved()) unsolved_cubies.push_back(cubies_[i]);
   return unsolved_cubies;
 }
 
@@ -170,10 +186,12 @@ std::vector<Cubie> Cube::GetUnsolvedCubies() const {
 */
 std::vector<Cubie> Cube::GetUnsolvedEdges() const {
   std::vector<Cubie> unsolved_edges;
-  for (auto cubie : cubies_)
-    if (cubie.IsEdge() && !cubie.IsSolved()) unsolved_edges.push_back(cubie);
+  int size = cubies_.size();
+  for (auto i = 0; i < size; ++i)
+    if (cubies_[i].IsEdge() && !cubies_[i].IsSolved()) unsolved_edges.push_back(cubies_[i]);
   return unsolved_edges;
 }
+
 
 /*
   Scrambles the cube.
