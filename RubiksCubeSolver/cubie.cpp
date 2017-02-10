@@ -22,8 +22,12 @@ Cubie::Cubie(const std::tuple<int, int, int> &solved_position)
 /*
   Copy Constructor for Cubie class.
 */
-Cubie::Cubie(const Cubie &cubie) : position_(cubie.position_), 
-solved_position_(cubie.solved_position_), values_(cubie.values_) { }
+Cubie::Cubie(const Cubie &cubie) {
+  position_ = std::make_tuple(std::get<0>(cubie.position_), std::get<1>(cubie.position_), std::get<2>(cubie.position_));
+  solved_position_ = std::make_tuple(std::get<0>(cubie.solved_position_), std::get<1>(cubie.solved_position_), std::get<2>(cubie.solved_position_));
+  for (auto value : cubie.values_) 
+    values_.push_back(std::make_tuple(std::get<0>(value), std::get<1>(value), std::get<2>(value)));
+}
 
 /*
   Returns true if the cubie is a center cubie.
@@ -45,7 +49,8 @@ bool Cubie::IsEdge() const { return values_.size() == 2; }
 */
 bool Cubie::Equals(const Cubie &cubie) const {
   if (position_ != cubie.position_) return false;
-  for (auto i = 0; i < values_.size(); ++i) {
+  int size = values_.size();
+  for (auto i = 0; i < size; ++i) {
     if (std::get<0>(values_[i]) != std::get<0>(cubie.values_[i])
       || std::get<1>(values_[i]) != std::get<1>(cubie.values_[i])) return false;
   }
