@@ -66,7 +66,7 @@ void Cube::Move(char axis, int layer, int turns) {
   for (auto i = 0; i < turns; ++i) {
     for (Cubie &cubie : cubies_) {
       if (cubie.IsInAxisLayer(axis, layer)) {
-        std::vector<std::tuple<char, char, const char>> values = cubie.values();
+        std::vector<std::tuple<char, char, char>> values = cubie.values();
         for (auto value : values) {
           cubie.SetFaceForValue(
             std::get<0>(value),
