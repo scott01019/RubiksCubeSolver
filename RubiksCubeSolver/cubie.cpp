@@ -99,7 +99,7 @@ bool Cubie::IsSolved() const { return IsOriented() && IsPositioned(); }
   Sets the current face for the given value.
 */
 void Cubie::SetFaceForValue(char val, char face) {
-  for (std::tuple<char, char, const char> &value : values_)
+  for (std::tuple<char, char, char> &value : values_)
     if (std::get<0>(value) == val)
       std::get<1>(value) = face;
 }
