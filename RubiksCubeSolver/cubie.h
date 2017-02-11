@@ -10,6 +10,7 @@
 */
 class Cubie {
 public:
+  Cubie() {}
   Cubie(const std::tuple<int, int, int> &);
   Cubie(const Cubie &);
 
@@ -25,14 +26,14 @@ public:
 
   const std::tuple<int, int, int> &position() const { return position_; }
   const std::tuple<int, int, int> &solved_position() const { return solved_position_; }
-  const std::vector<std::tuple<char, char, const char>> &values() const { return values_;  }
+  const std::vector<std::tuple<char, char, char>> &values() const { return values_;  }
 
   void set_position(const std::tuple<int, int, int> &pos) { position_ = pos; }
 
 private:
   std::tuple<int, int, int> position_; // x, y, z
   std::tuple<int, int, int> solved_position_; // x, y, z
-  std::vector<std::tuple<char, char, const char>> values_; // value, face value is currently on, face value is solved on
+  std::vector<std::tuple<char, char, char>> values_; // value, face value is currently on, face value is solved on
 };
 
 #endif // CUBIE_H_
