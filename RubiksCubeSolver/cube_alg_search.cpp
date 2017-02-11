@@ -80,7 +80,7 @@ void CubeAlgSearch::GenerateCubieAlgorithms(const std::string &filename) {
   file.open(filename, std::ios::app);
 
   for (auto cubie : cubies) {
-    std::vector<std::tuple<char, char, const char>> values = cubie.values();
+    std::vector<std::tuple<char, char, char>> values = cubie.values();
     std::tuple<int, int, int> p = cubie.position();
     if (p != std::make_tuple(1, 1, 1) && p != std::make_tuple(1, 1, 0)) {
       for (auto value : values) {
@@ -123,7 +123,7 @@ bool CubeAlgSearch::GoalFound(
 
   if (cubie == NULL) return false;
   if (cubie->position() != goal_position) return false;
-  std::vector<std::tuple<char, char, const char>> values = cubie->values();
+  std::vector<std::tuple<char, char, char>> values = cubie->values();
   for (auto val : values) {
     if (std::get<0>(val) == value) {
       if (std::get<1>(val) != goal_face) return false;
