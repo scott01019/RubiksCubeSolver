@@ -89,7 +89,7 @@ void CubePrinter::SetFaces(std::vector<std::vector<char>> print_cube[], const Cu
   std::vector<Cubie> cubies = cube.cubies();
   for (auto cubie : cubies) {
     std::tuple<int, int, int> position = cubie.position();
-    std::vector<std::tuple<char, char, const char>> values = cubie.values();
+    std::vector<std::tuple<char, char, char>> values = cubie.values();
     for (auto value : values) {
       switch (std::get<1>(value)) {
       case 'R': {
