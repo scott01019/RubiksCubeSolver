@@ -13,7 +13,7 @@
 */
 class CubeSolver {
 public:
-  static const std::map<std::tuple<std::tuple<int, int, int>, char>, const std::string> ALGS;
+  static const std::map<std::tuple<std::tuple<int, int, int>, char>, std::vector<std::string>> ALGS;
 
   static std::string InverseMove(const std::string &);
   static std::vector<std::string> ReverseAndInverseAlg(const std::vector<std::string> &);
