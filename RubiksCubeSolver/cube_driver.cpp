@@ -37,7 +37,7 @@ void CubeDriver::ExecuteCommand(const std::string &command) {
       std::string filename;
       std::cout << "Please enter a filename: ";
       std::cin >> filename;
-      thread_ = std::make_unique<std::thread>(std::thread(CubeAlgSearch::GenerateCubieAlgorithms, filename));
+      thread_ = std::unique_ptr<std::thread>(new std::thread(CubeAlgSearch::GenerateCubieAlgorithms, filename));
       thread_->detach();
     } else {
       std::cout << "\n\nAlgorithm file is already being generated!\n\n";
