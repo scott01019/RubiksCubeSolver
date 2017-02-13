@@ -5,7 +5,7 @@
 #include <iostream>
 #include <tuple>
 #include <vector>
-#include <Windows.h>
+//#include <Windows.h>
 
 /*
   Executes the print process.
@@ -45,7 +45,7 @@ int CubePrinter::GetColor(char face) {
   Prints the cube to the console.
 */
 void CubePrinter::Print(std::vector<std::vector<char>> cube[]) {
-  HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  //HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
   std::cout << "\n";
 
@@ -54,16 +54,16 @@ void CubePrinter::Print(std::vector<std::vector<char>> cube[]) {
   for (auto i = 0; i < size; ++i) {
     for (auto j = 0; j < size; ++j) std::cout << " ";
     for (auto j = 0; j < size; ++j) {
-      SetConsoleTextAttribute(hConsole, CubePrinter::GetColor(cube[0][i][j]));
-      std::cout << (char)254u;
+      //SetConsoleTextAttribute(hConsole, CubePrinter::GetColor(cube[0][i][j]));
+      std::cout << cube[0][i][j];
     }
     std::cout << "\n";
   }
   for (auto i = 0; i < size; ++i) {
     for (auto j = 1; j < 5; ++j) {
       for (auto k = 0; k < size; ++k) {
-        SetConsoleTextAttribute(hConsole, GetColor(cube[j][i][k]));
-        std::cout << (char)254u;
+        //SetConsoleTextAttribute(hConsole, GetColor(cube[j][i][k]));
+        std::cout << cube[j][i][k];
       }
     }
     std::cout << "\n";
@@ -72,14 +72,14 @@ void CubePrinter::Print(std::vector<std::vector<char>> cube[]) {
   for (auto i = 0; i < size; ++i) {
     for (auto j = 0; j < size; ++j) std::cout << " ";
     for (auto j = 0; j < size; ++j) {
-      SetConsoleTextAttribute(hConsole, GetColor(cube[5][i][j]));
-      std::cout << (char)254u;
+      //SetConsoleTextAttribute(hConsole, GetColor(cube[5][i][j]));
+      std::cout << cube[5][i][j];
     }
     std::cout << "\n";
   }
 
   std::cout << "\n";
-  SetConsoleTextAttribute(hConsole, 15);
+  //SetConsoleTextAttribute(hConsole, 15);
 }
 
 /*
