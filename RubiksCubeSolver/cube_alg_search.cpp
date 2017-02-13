@@ -77,9 +77,9 @@ void CubeAlgSearch::GenerateCubieAlgorithms(const std::string &filename) {
   std::ofstream file;
   file.open(filename);
   file.close();
-  file.open(filename, std::ios::app);
 
   for (auto cubie : cubies) {
+    file.open(filename, std::ios::app);
     std::vector<std::tuple<char, char, char>> values = cubie.values();
     std::tuple<int, int, int> p = cubie.position();
     if (p != std::make_tuple(1, 1, 1) && p != std::make_tuple(1, 1, 0)) {
@@ -94,9 +94,8 @@ void CubeAlgSearch::GenerateCubieAlgorithms(const std::string &filename) {
         }
       }
     }
+    file.close();
   }
-
-  file.close();
 }
 
 /*
