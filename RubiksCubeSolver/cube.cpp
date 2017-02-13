@@ -40,7 +40,7 @@ const std::vector<std::string> Cube::T_PERM = { "R", "U", "R'", "U'", "R'",
 /*
   Initializes the cube and the moves map.
 */
-void Cube::init() {
+Cube::Cube() {
   for (auto x = -1; x < 2; ++x) {
     for (auto y = -1; y < 2; ++y) {
       for (auto z = -1; z < 2; ++z) {

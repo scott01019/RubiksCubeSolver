@@ -19,7 +19,7 @@ public:
   static const int SIZE = 3;
   static const std::vector<std::string> T_PERM;
 
-  Cube() { init(); }
+  Cube();
   Cube(const Cube &);
 
   void Move(char, int, int);
@@ -68,8 +68,6 @@ public:
   int size() const { return SIZE; }
 
 private:
-  void init();
-
   std::vector<Cubie> cubies_; // A vector of the cubies.
 };
 
