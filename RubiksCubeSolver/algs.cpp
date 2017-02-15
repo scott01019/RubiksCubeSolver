@@ -37,3 +37,15 @@ std::string SpaceDecoraterAlg(const std::tuple<int, int, int> &position,
   } result += "\n";
   return result;
 }
+
+/*
+  A hashing algorithm for cubie orientations.
+*/
+std::size_t CubieHash::operator()(const std::tuple<std::tuple<int, int, int>, char> &key) const {
+  return std::size_t(
+    std::get<1>(key) * 1000
+    + (std::get<0>(std::get<0>(key)) + 2) * 100
+    + (std::get<1>(std::get<0>(key)) + 2) * 10
+    + (std::get<2>(std::get<0>(key)) + 2)
+  );
+}
