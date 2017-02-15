@@ -1,14 +1,15 @@
+#include "algs.h"
 #include "cube.h"
 #include "cube_solver.h"
 
 #include <algorithm>
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <tuple>
 #include <vector>
 
 //  Map of all algorithms to move every cubie and cubie face to their buffer position
-const std::map<std::tuple<std::tuple<int, int, int>, char>, std::vector<std::string>> CubeSolver::ALGS = {
+const std::unordered_map<std::tuple<std::tuple<int, int, int>, char>, std::vector<std::string>, CubieHash> CubeSolver::ALGS = {
   { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'L'), std::vector<std::string>({ "R'", "D", "R" }) },
   { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'D'), std::vector<std::string>({ "F2" }) },
   { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'F'), std::vector<std::string>({ "D", "F'" }) },
