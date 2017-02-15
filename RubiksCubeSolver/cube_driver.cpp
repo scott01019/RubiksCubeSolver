@@ -4,6 +4,7 @@
 #include "cube_printer.h"
 #include "cube_solver.h"
 
+#include <chrono>
 #include <iostream>
 #include <string>
 #include <thread>
@@ -18,9 +19,12 @@ void CubeDriver::ExecuteCommand(const std::string &command) {
   } else if (command == "2") {
     cube_.Scramble();
   } else if (command == "3") {
+    auto start = std::chrono::system_clock::now();
     std::vector<std::string> solution = CubeSolver::Solve(cube_);
+    auto end = std::chrono::system_clock::now();
     std::cout << "Solution: ";
     for (auto move : solution) std::cout << move << " ";
+    std::cout << "\n\nAlgorithm Found in: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << "ms\n";
   } else if (command == "4") {
     std::vector<std::string> solution = CubeSolver::Solve(cube_);
     std::cout << "Solution: ";
