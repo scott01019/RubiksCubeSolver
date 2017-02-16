@@ -20,6 +20,7 @@ public:
   );
 
   static void GenerateCubieAlgorithms(const std::string &);
+  static std::vector<std::string> GetFullSwappingAlg(const std::vector<std::string> &);
 
   static bool GoalFound(
     const std::vector<std::string> &,

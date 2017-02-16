@@ -1,6 +1,7 @@
 #include "algs.h"
 #include "cube.h"
 #include "cube_alg_search.h"
+#include "cube_solver.h"
 #include "cubie.h"
 
 #include <fstream>
@@ -82,21 +83,33 @@ void CubeAlgSearch::GenerateCubieAlgorithms(const std::string &filename) {
     file.open(filename, std::ios::app);
     std::vector<std::tuple<char, char, char>> values = cubie.values();
     std::tuple<int, int, int> p = cubie.position();
-    if (p != std::make_tuple(1, 1, 1) && p != std::make_tuple(1, 1, 0)) {
+    if (p != std::make_tuple(1, 1, 1) && p != std::make_tuple(1, 1, 0) && !cubie.IsCenter()) {
       for (auto value : values) {
         std::vector<std::string> result;
         if (cubie.IsEdge())
           result = CubeAlgSearch::FindAlgorithm(p, std::get<0>(value), goal_edge, 'U', edge_holds);
         if (cubie.IsCorner())
           result = CubeAlgSearch::FindAlgorithm(p, std::get<0>(value), goal_corner, 'U', corner_holds);
-        if (!cubie.IsCenter()) {
-         file << MyDecoraterAlg(p, std::get<0>(value), result);
-        }
+        file << MyDecoraterAlg(p, std::get<0>(value), GetFullSwappingAlg(result));
       }
     }
     file.close();
   }
 }
+
+/*
+  Returns the full swapping algorithm given the alg to position a cubie.
+  Example: alg = "R", "F", "R'", "F2"
+  The the result = "R", "F", "R'", "F2", T_PERM, "F2", "R", "F'" "R'"
+*/
+std::vector<std::string> CubeAlgSearch::GetFullSwappingAlg(const std::vector<std::string> &alg) {
+  std::vector<std::string> result(alg);
+  result.insert(result.end(), Cube::T_PERM.begin(), Cube::T_PERM.end());
+  std::vector<std::string> inverse_reverse = CubeSolver::ReverseAndInverseAlg(alg);
+  result.insert(result.end(), inverse_reverse.begin(), inverse_reverse.end());
+  return result;
+}
+
 
 /*
   Checks whether the desired algorithm has been found.
