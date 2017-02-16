@@ -10,49 +10,49 @@
 
 //  Map of all algorithms to move every cubie and cubie face to their buffer position
 const std::unordered_map<std::tuple<std::tuple<int, int, int>, char>, std::vector<std::string>, CubieHash> CubeSolver::ALGS = {
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'L'), std::vector<std::string>({ "R'", "D", "R" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'D'), std::vector<std::string>({ "F2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'F'), std::vector<std::string>({ "D", "F'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 0), 'L'), std::vector<std::string>({ "L", "U", "B'", "U'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 0), 'D'), std::vector<std::string>({ "L2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 1), 'L'), std::vector<std::string>({ "D2", "F'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 1), 'D'), std::vector<std::string>({ "D", "F2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 1), 'B'), std::vector<std::string>({ "R'", "D2", "R" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 0, -1), 'L'), std::vector<std::string>({ "U'", "F", "U" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 0, -1), 'F'), std::vector<std::string>({ "L'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 0, 1), 'L'), std::vector<std::string>({ "U", "B'", "U'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 0, 1), 'B'), std::vector<std::string>({ "L" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, -1), 'L'), std::vector<std::string>({ "F" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, -1), 'U'), std::vector<std::string>({ "F2", "D'", "F2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, -1), 'F'), std::vector<std::string>({ "F'", "D", "F'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 0), 'L'), std::vector<std::string>({ "L", "U'", "F", "U" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 0), 'U'), std::vector<std::string>({}) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 1), 'L'), std::vector<std::string>({ "R'", "B2", "R", "F'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 1), 'U'), std::vector<std::string>({ "R2", "B2", "R2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 1), 'B'), std::vector<std::string>({ "R'", "B", "D2", "R" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, -1, -1), 'D'), std::vector<std::string>({ "D'", "L2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, -1, -1), 'F'), std::vector<std::string>({ "F", "L'", "F'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, -1, 1), 'D'), std::vector<std::string>({ "D", "L2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, -1, 1), 'B'), std::vector<std::string>({ "B'", "L", "B" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, 1, -1), 'U'), std::vector<std::string>({ "R2", "U", "R2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, 1, -1), 'F'), std::vector<std::string>({ "R", "F'", "R'", "L'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, 1, 1), 'U'), std::vector<std::string>({ "R2", "U'", "R2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, 1, 1), 'B'), std::vector<std::string>({ "R'", "B", "R", "L" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, -1), 'R'), std::vector<std::string>({ "F'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, -1), 'D'), std::vector<std::string>({ "D'", "F2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, -1), 'F'), std::vector<std::string>({ "F", "D", "F'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 0), 'R'), std::vector<std::string>({ "F'", "D'", "F", "L'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 0), 'D'), std::vector<std::string>({ "D2", "L2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 1), 'R'), std::vector<std::string>({ "R", "F", "R'", "F2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 1), 'D'), std::vector<std::string>({ "D2", "F2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 1), 'B'), std::vector<std::string>({ "D'", "F'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 0, -1), 'R'), std::vector<std::string>({ "U'", "F'", "U" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 0, -1), 'F'), std::vector<std::string>({ "U2", "R", "U2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 0, 1), 'R'), std::vector<std::string>({ "U", "B", "U'" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 0, 1), 'B'), std::vector<std::string>({ "U2", "R'", "U2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 1, -1), 'R'), std::vector<std::string>({ "F", "D'", "F2" }) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 1, -1), 'U'), std::vector<std::string>({}) },
-  { std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 1, -1), 'F'), std::vector<std::string>({ "F2", "D", "F'" }) }
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'L'), std::vector<std::string>({ "R'", "D", "R", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "R'", "D'", "R" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'D'), std::vector<std::string>({ "F2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, -1), 'F'), std::vector<std::string>({ "D", "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F", "D'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 0), 'L'), std::vector<std::string>({ "L", "U", "B'", "U'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "U", "B", "U'", "L'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 0), 'D'), std::vector<std::string>({ "L2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 1), 'L'), std::vector<std::string>({ "D2", "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F", "D2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 1), 'D'), std::vector<std::string>({ "D", "F2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F2", "D'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, -1, 1), 'B'), std::vector<std::string>({ "R'", "D2", "R", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "R'", "D2", "R" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 0, -1), 'L'), std::vector<std::string>({ "U'", "F", "U", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "U'", "F'", "U" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 0, -1), 'F'), std::vector<std::string>({ "L'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 0, 1), 'L'), std::vector<std::string>({ "U", "B'", "U'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "U", "B", "U'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 0, 1), 'B'), std::vector<std::string>({ "L", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, -1), 'L'), std::vector<std::string>({ "F", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, -1), 'U'), std::vector<std::string>({ "F2", "D'", "F2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F2", "D", "F2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, -1), 'F'), std::vector<std::string>({ "F'", "D", "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F", "D'", "F" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 0), 'L'), std::vector<std::string>({ "L", "U'", "F", "U", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "U'", "F'", "U", "L'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 0), 'U'), std::vector<std::string>({ "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 1), 'L'), std::vector<std::string>({ "R'", "B2", "R", "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F", "R'", "B2", "R" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 1), 'U'), std::vector<std::string>({ "R2", "B2", "R2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "R2", "B2", "R2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(-1, 1, 1), 'B'), std::vector<std::string>({ "R'", "B", "D2", "R", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "R'", "D2", "B'", "R" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, -1, -1), 'D'), std::vector<std::string>({ "D'", "L2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L2", "D" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, -1, -1), 'F'), std::vector<std::string>({ "F", "L'", "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F", "L", "F'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, -1, 1), 'D'), std::vector<std::string>({ "D", "L2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L2", "D'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, -1, 1), 'B'), std::vector<std::string>({ "B'", "L", "B", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "B'", "L'", "B" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, 1, -1), 'U'), std::vector<std::string>({ "R2", "U", "R2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "R2", "U'", "R2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, 1, -1), 'F'), std::vector<std::string>({ "R", "F'", "R'", "L'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L", "R", "F", "R'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, 1, 1), 'U'), std::vector<std::string>({ "R2", "U'", "R2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "R2", "U", "R2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(0, 1, 1), 'B'), std::vector<std::string>({ "R'", "B", "R", "L", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L'", "R'", "B'", "R" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, -1), 'R'), std::vector<std::string>({ "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, -1), 'D'), std::vector<std::string>({ "D'", "F2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F2", "D" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, -1), 'F'), std::vector<std::string>({ "F", "D", "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F", "D'", "F'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 0), 'R'), std::vector<std::string>({ "F'", "D'", "F", "L'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L", "F'", "D", "F" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 0), 'D'), std::vector<std::string>({ "D2", "L2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "L2", "D2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 1), 'R'), std::vector<std::string>({ "R", "F", "R'", "F2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F2", "R", "F'", "R'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 1), 'D'), std::vector<std::string>({ "D2", "F2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F2", "D2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, -1, 1), 'B'), std::vector<std::string>({ "D'", "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F", "D" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 0, -1), 'R'), std::vector<std::string>({ "U'", "F'", "U", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "U'", "F", "U" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 0, -1), 'F'), std::vector<std::string>({ "U2", "R", "U2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "U2", "R'", "U2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 0, 1), 'R'), std::vector<std::string>({ "U", "B", "U'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "U", "B'", "U'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 0, 1), 'B'), std::vector<std::string>({ "U2", "R'", "U2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "U2", "R", "U2" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 1, -1), 'R'), std::vector<std::string>({ "F", "D'", "F2", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F2", "D", "F'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 1, -1), 'U'), std::vector<std::string>({ "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'" }) },
+{ std::tuple<std::tuple<int, int, int>, char>(std::tuple<int, int, int>(1, 1, -1), 'F'), std::vector<std::string>({ "F2", "D", "F'", "R", "U", "R'", "U'", "R'", "F", "R2", "U'", "R'", "U'", "R", "U", "R'", "F'", "F", "D'", "F2" }) }
 };
 
 /*
@@ -141,21 +141,10 @@ std::vector<std::string> CubeSolver::SolveCorners(const Cube &cube) {
       //  get algorithm for that value and position
       alg = CubeSolver::ALGS.at(std::tuple<std::tuple<int, int, int>, char>(random_unsolved_cubie.solved_position(), goal_face));
     }
-    //  used to store the moves required to solve the current corner
-    std::vector<std::string> moves;
-    //  add the moves from the algorithm to the vector
-    int size = alg.size();
-    for (auto i = 0; i < size; ++i) moves.push_back(alg[i]);
-    //  gets the inverse reverse of the algorithm
-    std::vector<std::string> inverse_reverse = CubeSolver::ReverseAndInverseAlg(alg);
-    //  add the swapping algorithms to the vector
-    moves.insert(moves.end(), Cube::T_PERM.begin(), Cube::T_PERM.end());
-    //  add the inverse reverse aglorithm to the vector
-    moves.insert(moves.end(), inverse_reverse.begin(), inverse_reverse.end());
     //  insert the final vector of moves into the solution vector
-    solution.insert(solution.end(), moves.begin(), moves.end());
+    solution.insert(solution.end(), alg.begin(), alg.end());
     //  execute the moves on the cube
-    cube_cpy.Move(moves);
+    cube_cpy.Move(alg);
     //  get updated list of unsolved corners
     unsolved_corners = cube_cpy.GetUnsolvedCorners();
   }
@@ -214,21 +203,10 @@ std::vector<std::string> CubeSolver::SolveEdges(const Cube &cube) {
       //  get algorithm for that value and position
       alg = CubeSolver::ALGS.at(std::tuple<std::tuple<int, int, int>, char>(random_unsolved_cubie.solved_position(), goal_face));
     }
-    //  used to store the moves required to solve the current corner
-    std::vector<std::string> moves;
-    //  add the moves from the algorithm to the vector
-    int size = alg.size();
-    for (auto i = 0; i < size; ++i) moves.push_back(alg[i]);
-    //  gets the inverse reverse of the algorithm
-    std::vector<std::string> inverse_reverse = CubeSolver::ReverseAndInverseAlg(alg);
-    //  add the swapping algorithms to the vector
-    moves.insert(moves.end(), Cube::T_PERM.begin(), Cube::T_PERM.end());
-    //  add the inverse reverse aglorithm to the vector
-    moves.insert(moves.end(), inverse_reverse.begin(), inverse_reverse.end());
     //  insert the final vector of moves into the solution vector
-    solution.insert(solution.end(), moves.begin(), moves.end());
+    solution.insert(solution.end(), alg.begin(), alg.end());
     //  execute the moves on the cube
-    cube_cpy.Move(moves);
+    cube_cpy.Move(alg);
     //  get updated list of unsolved corners
     unsolved_edges = cube_cpy.GetUnsolvedEdges();
   }
